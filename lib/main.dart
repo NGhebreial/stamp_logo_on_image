@@ -123,141 +123,136 @@ class _LogoOnImage extends State<CameraUpload> {
 
     _positionLogoWidget = _logoSelected != ""
         ? new Stack(
-      fit: StackFit.expand,
-      alignment: Alignment.bottomCenter,
-      children: <Widget>[
-        /// These four are the boxes to select the position
-        new WidgetUtils().createDragTarget(
-            _widthScreen,
-            _heightScreen - appBottomBarHeight - appBarHeight,
-            new Offset(0.0, 0.0),
-            "TL",
-            _showLogoOnImage,
-            new Text(
-              "Show in Top Left",
-              style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 18.0,
-                  color: Colors.white),
-            )),
+            fit: StackFit.expand,
+            alignment: Alignment.bottomCenter,
+            children: <Widget>[
+              /// These four are the boxes to select the position
+              new WidgetUtils().createDragTarget(
+                  _widthScreen,
+                  _heightScreen - appBottomBarHeight - appBarHeight,
+                  new Offset(0.0, 0.0),
+                  "TL",
+                  _showLogoOnImage,
+                  new Text(
+                    "Show in Top Left",
+                    style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 18.0,
+                        color: Colors.white),
+                  )),
 
-        new WidgetUtils().createDragTarget(
-            _widthScreen,
-            _heightScreen - appBottomBarHeight - appBarHeight,
-            new Offset(_widthScreen * 0.5, 0.0),
-            "TR",
-            _showLogoOnImage,
-            new Text(
-              "Show in Top Right",
-              style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 18.0,
-                  color: Colors.white),
-            )),
+              new WidgetUtils().createDragTarget(
+                  _widthScreen,
+                  _heightScreen - appBottomBarHeight - appBarHeight,
+                  new Offset(_widthScreen * 0.5, 0.0),
+                  "TR",
+                  _showLogoOnImage,
+                  new Text(
+                    "Show in Top Right",
+                    style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 18.0,
+                        color: Colors.white),
+                  )),
 
-        new WidgetUtils().createDragTarget(
-            _widthScreen,
-            _heightScreen - appBottomBarHeight - appBarHeight,
-            new Offset(0.0, (_heightScreen * 0.5) - appBottomBarHeight),
-            "BL",
-            _showLogoOnImage,
-            new Text(
-              "Show in Bottom Left",
-              style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 18.0,
-                  color: Colors.white),
-            )),
+              new WidgetUtils().createDragTarget(
+                  _widthScreen,
+                  _heightScreen - appBottomBarHeight - appBarHeight,
+                  new Offset(0.0, (_heightScreen * 0.5) - appBottomBarHeight),
+                  "BL",
+                  _showLogoOnImage,
+                  new Text(
+                    "Show in Bottom Left",
+                    style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 18.0,
+                        color: Colors.white),
+                  )),
 
-        new WidgetUtils().createDragTarget(
-            _widthScreen,
-            _heightScreen - appBottomBarHeight - appBarHeight,
-            new Offset(_widthScreen * 0.5,
-                (_heightScreen * 0.5) - appBottomBarHeight),
-            "BR",
-            _showLogoOnImage,
-            new Text(
-              "Show in Bottom Right",
-              style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 18.0,
-                  color: Colors.white),
-            )),
+              new WidgetUtils().createDragTarget(
+                  _widthScreen,
+                  _heightScreen - appBottomBarHeight - appBarHeight,
+                  new Offset(_widthScreen * 0.5,
+                      (_heightScreen * 0.5) - appBottomBarHeight),
+                  "BR",
+                  _showLogoOnImage,
+                  new Text(
+                    "Show in Bottom Right",
+                    style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 18.0,
+                        color: Colors.white),
+                  )),
 
-        ///This is the logo that will be showed in the middle of the screen
-        new Positioned(
-            left: (_widthScreen * 0.5) - widthLogo / 2,
-            top: (_heightScreen * 0.5) -
-                appBottomBarHeight -
-                (heightLogo / 2),
-            child: new Container(
-              width: widthLogo,
-              height: heightLogo,
-              child: new Draggable(
+              ///This is the logo that will be showed in the middle of the screen
+              new Positioned(
+                  left: (_widthScreen * 0.5) - widthLogo / 2,
+                  top: (_heightScreen * 0.5) -
+                      appBottomBarHeight -
+                      (heightLogo / 2),
                   child: new Container(
-                      width: widthLogo,
-                      height: heightLogo,
-                      child: Card(
-                        color: Color.fromRGBO(255, 255, 255, 0.5),
-                        child: new Image.asset(
-                          _logoSelected,
-                        ),
-                      )),
-                  feedback: new Container(
                     width: widthLogo,
                     height: heightLogo,
-                    child: Card(
-                      color: Color.fromRGBO(255, 255, 255, 0.5),
-                      child: new Image.asset(
-                        _logoSelected,
-                      ),
-                    ),
+                    child: new Draggable(
+                        child: new Container(
+                            width: widthLogo,
+                            height: heightLogo,
+                            child: Card(
+                              color: Color.fromRGBO(255, 255, 255, 0.5),
+                              child: new Image.asset(
+                                _logoSelected,
+                              ),
+                            )),
+                        feedback: new Container(
+                          width: widthLogo,
+                          height: heightLogo,
+                          child: Card(
+                            color: Color.fromRGBO(255, 255, 255, 0.5),
+                            child: new Image.asset(
+                              _logoSelected,
+                            ),
+                          ),
+                        )),
                   )),
-            )),
-      ],
-    )
+            ],
+          )
         : new Container(width: 0.0, height: 0.0);
 
     _bottomButton = _logoSelected != ""
         ? FancyFab(
-        [],
-        new DragTarget(
-          builder: (BuildContext context, accepted, rejects) {
-            return
-              new InkWell(
-                child: new Container(
-                  alignment: Alignment.center,
-
-                  decoration: new BoxDecoration(
-                      shape: BoxShape.circle,
-                      color: accepted.isEmpty ? Colors.red : Colors.red[100],
-                      border: new Border.all(
-                          width: accepted.isEmpty ? 0.0 : 2.0,
-                          color:
-                          accepted.isEmpty ? Colors.red[100] : Colors.red)
+            [],
+            new DragTarget(
+              builder: (BuildContext context, accepted, rejects) {
+                return new InkWell(
+                  child: new Container(
+                    alignment: Alignment.center,
+                    decoration: new BoxDecoration(
+                        shape: BoxShape.circle,
+                        color: accepted.isEmpty ? Colors.red : Colors.red[100],
+                        border: new Border.all(
+                            width: accepted.isEmpty ? 0.0 : 2.0,
+                            color: accepted.isEmpty
+                                ? Colors.red[100]
+                                : Colors.red)),
+                    child: new Icon(
+                      Icons.delete,
+                      color: accepted.isEmpty ? Colors.white : Colors.black,
+                    ),
                   ),
-
-                  child: new Icon(
-                    Icons.delete,
-                    color: accepted.isEmpty ? Colors.white : Colors.black,
-                  ),
-
-                ),
-                onTap: (){
-                  _logoSelected = "";
-                  _setStateImage();
-                },
-              );
-          },
-          onWillAccept: (data) {
-            return true;
-          },
-          onAccept: (data) {
-            _logoSelected = "";
-            _setStateImage();
-          },
-        )
-    )
+                  onTap: () {
+                    _logoSelected = "";
+                    _setStateImage();
+                  },
+                );
+              },
+              onWillAccept: (data) {
+                return true;
+              },
+              onAccept: (data) {
+                _logoSelected = "";
+                _setStateImage();
+              },
+            ))
         : FancyFab([getImageCamera, getImageFile], null);
   }
 
@@ -365,17 +360,15 @@ class _LogoOnImage extends State<CameraUpload> {
       //to make faster the posterior treatment
       _loadListLogos();
     });
-
   }
 
   /// Make the treatment of logos uploaded for the user
   void _loadListLogos() async {
-
     /// Loading the directory of logos uploaded for the user
     Directory _logosDirectory = new Directory(_logosDir);
     compute(loadUserLogos, _logosDirectory)
         .then((HashMap<String, im.Image> userLogos) {
-          _userLogos = userLogos;
+      _userLogos = userLogos;
     });
   }
 
@@ -407,10 +400,10 @@ class _LogoOnImage extends State<CameraUpload> {
     if (_imageFile == null) {
       return new Center(
           child: new Text(
-            'Pick image or upload from files',
-            style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.w700),
-            textAlign: TextAlign.center,
-          ));
+        'Pick image or upload from files',
+        style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.w700),
+        textAlign: TextAlign.center,
+      ));
     } else {
       return new Container(
         alignment: Alignment.center,
@@ -464,7 +457,7 @@ class _LogoOnImage extends State<CameraUpload> {
       ///This is a trick. In some mobiles the image is showed rotated from the
       ///beginning, so I made some adjustment in this plugin to check if it's
       ///necessary rotate the image before show it
-      _imageFile =  await FlutterExifRotation.rotateImage(path: _imageFile.path);
+      _imageFile = await FlutterExifRotation.rotateImage(path: _imageFile.path);
 
       _savedImagesPaths.add(_imageFile.path);
       _changeColorBackButton();
@@ -473,9 +466,9 @@ class _LogoOnImage extends State<CameraUpload> {
       ///thread to make the app faster
       compute(decodeImage, _imageFile).then((im.Image imageDecode) {
         _image = imageDecode;
+
         ///Show the image selected
         _setStateImage();
-
       });
     } else {
       ///If there is not image selected just show the main screen
@@ -507,7 +500,8 @@ class _LogoOnImage extends State<CameraUpload> {
 
       compute(rotateImage, args).then((File file) {
         _imageFile = file;
-        FlutterShareContent.shareContent( imageUrl: _imageFile.path).then((void value) {
+        FlutterShareContent.shareContent(imageUrl: _imageFile.path)
+            .then((void value) {
           //_toggleShareButtons();
           _setStateImage();
           new ImageSave().saveImage(_imageFile).then((String path) {
@@ -525,7 +519,7 @@ class _LogoOnImage extends State<CameraUpload> {
         });
       });
     } else {
-      FlutterShareContent.shareContent( imageUrl: _imageFile.path);
+      FlutterShareContent.shareContent(imageUrl: _imageFile.path);
     }
   }
 
@@ -577,7 +571,6 @@ class _LogoOnImage extends State<CameraUpload> {
   }
 
   void _saveImage() {
-
     new ImageSave().saveImage(_imageFile).then((String path) {
       _imageFile = new File(path);
       _setStateImage();
@@ -637,7 +630,6 @@ class _LogoOnImage extends State<CameraUpload> {
 
   ///Modal bottom sheet with the possible logos to select
   void _showPossibleLogos() {
-
     showModalBottomSheet(
         context: _context,
         builder: (BuildContext context) {
@@ -718,8 +710,6 @@ class _LogoOnImage extends State<CameraUpload> {
     new ImageSave()
         .saveImageTemporal(_imageFile, _temporalDir)
         .then((File file) {
-
-
       _imageFile = new File(file.path);
 
       ///This is not nice but necessary. To compute drawing the logo on the image
@@ -756,7 +746,7 @@ class _LogoOnImage extends State<CameraUpload> {
     }
   }
 
-  FABBottomAppBar _fullFabBottomAppBar(){
+  FABBottomAppBar _fullFabBottomAppBar() {
     return FABBottomAppBar(
       backgroundColor: Colors.white,
       selectedColor: new Color.fromRGBO(40, 68, 86, 1.0),
@@ -820,7 +810,6 @@ class _LogoOnImage extends State<CameraUpload> {
       backgroundColor: Color.fromRGBO(242, 242, 242, 1.0),
     );
   }
-
 }
 
 class CameraUpload extends StatefulWidget {

@@ -1,9 +1,8 @@
-
-
 import 'package:flutter/material.dart';
 
 class FABBottomAppBarItem {
   FABBottomAppBarItem({this.widgetIcon, this.text, this.tap});
+
   String text;
   Widget widgetIcon;
   Function tap;
@@ -23,6 +22,7 @@ class FABBottomAppBar extends StatefulWidget {
   }) {
     //assert(this.items.length == 2 || this.items.length == 4);
   }
+
   final List<FABBottomAppBarItem> items;
   final String centerItemText;
   final double height;
@@ -40,7 +40,7 @@ class FABBottomAppBar extends StatefulWidget {
 class FABBottomAppBarState extends State<FABBottomAppBar> {
   int _selectedIndex = 0;
 
-  _updateIndex(int index){
+  _updateIndex(int index) {
     //widget.onTabSelected(index);
     setState(() {
       _selectedIndex = index;
@@ -49,7 +49,6 @@ class FABBottomAppBarState extends State<FABBottomAppBar> {
 
   @override
   Widget build(BuildContext context) {
-
     List<Widget> items = List.generate(widget.items.length, (int index) {
       return _buildTabItem(
         item: widget.items[index],
@@ -94,15 +93,18 @@ class FABBottomAppBarState extends State<FABBottomAppBar> {
     int index,
     ValueChanged<int> onPressed,
   }) {
-
     Color color = _selectedIndex == index ? widget.selectedColor : widget.color;
 
-    Widget widgetText = item.text != '' && item.text != null ? Text(
-      item.text,
-      style: TextStyle(color: color),
-    ): new Container(width: 0.0, height: 0.0);
+    Widget widgetText = item.text != '' && item.text != null
+        ? Text(
+            item.text,
+            style: TextStyle(color: color),
+          )
+        : new Container(width: 0.0, height: 0.0);
 
-    Widget widgetIcon = item.widgetIcon != null ? item.widgetIcon: new Container(width: 0.0, height: 0.0);
+    Widget widgetIcon = item.widgetIcon != null
+        ? item.widgetIcon
+        : new Container(width: 0.0, height: 0.0);
 
     return Expanded(
       child: SizedBox(

@@ -2,9 +2,9 @@
 
 A Flutter app to put a logo in a picture.
 
-This app allow to take a picture or upload from the gallery and make some changes on it like:
+This app allows to take a picture or upload from the gallery and make some changes like:
 
-- Shave it
+- Save it
 - Rotate it
 - Share it
 

@@ -29,8 +29,7 @@ dependencies:
   fluttertoast: ^2.2.3
   image_picker_saver:
     path: ../image_picker_saver
-  flutter_share_content:
-    path: ../flutter_share_content
+  flutter_share_content: ^0.1.0
   flutter_exif_rotation: ^0.1.2
 
 dev_dependencies:

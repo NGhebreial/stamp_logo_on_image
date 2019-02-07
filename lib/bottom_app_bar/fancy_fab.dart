@@ -22,7 +22,9 @@ class _FancyFabState extends State<FancyFab>
 
   @override
   initState() {
-    _icon = new Icon(Icons.add,);
+    _icon = new Icon(
+      Icons.add,
+    );
 
     _animationController =
         AnimationController(vsync: this, duration: Duration(milliseconds: 500))
@@ -76,7 +78,6 @@ class _FancyFabState extends State<FancyFab>
   }
 
   Widget takePicture() {
-
     return Container(
       padding: EdgeInsets.only(top: 20.0, bottom: 7.0),
       height: 70.0,
@@ -121,17 +122,16 @@ class _FancyFabState extends State<FancyFab>
       height: 55.0,
       width: 56.0,
       //alignment: FractionalOffset.topCenter,
-      child: widget.middleButton == null?
-      FloatingActionButton(
-        elevation: 0.0,
-        highlightElevation: 0.0,
-
-        backgroundColor: _buttonColor.value,
-        onPressed: animate,
-        tooltip: 'Add new picture',
-        child: _icon,
-      ): widget.middleButton,
-
+      child: widget.middleButton == null
+          ? FloatingActionButton(
+              elevation: 0.0,
+              highlightElevation: 0.0,
+              backgroundColor: _buttonColor.value,
+              onPressed: animate,
+              tooltip: 'Add new picture',
+              child: _icon,
+            )
+          : widget.middleButton,
     );
   }
 
