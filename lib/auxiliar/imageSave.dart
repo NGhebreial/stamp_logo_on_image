@@ -28,8 +28,7 @@ class ImageSave {
       return await ImagePickerSaver.saveFile(
           fileData: image.readAsBytesSync(),
           title: "LogoOnImage_" + now + ".png",
-          description: "LogoOnImage_" + now + ".png",
-          directory: "LogoOnImagePictures");
+          description: "LogoOnImage_" + now + ".png");
     } else {
       return await ImagePickerSaver.saveFile(fileData: image.readAsBytesSync());
     }

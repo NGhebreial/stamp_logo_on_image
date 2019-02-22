@@ -29,7 +29,7 @@ class WidgetUtils {
     var heightBoxes = height * 0.5;
     var widthBoxes = width * 0.5;
     var bColorG = Colors.blueGrey.withOpacity(0.6);
-    var bColorB = Colors.blue.withOpacity(0.6);
+    var bColorB = Color.fromRGBO(112, 217, 224, 1.0).withOpacity(0.6);
 
     return new Positioned(
         left: position.dx,

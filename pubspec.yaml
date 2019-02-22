@@ -17,20 +17,21 @@ dependencies:
     sdk: flutter
 
   cupertino_icons: ^0.1.2
-  image_picker: ^0.4.10
-  path_provider: ^0.4.1
+  image_picker: ^0.5.0
+  path_provider: ^0.5.0
   path: any
-  #IMPORTANT! for iOS change the dependency to that package
-  #image_picker_saver: ^0.1.0
   uuid: ^1.0.3
-  simple_permissions: ^0.1.8
+  permission_handler: ^3.0.0
   image: ^2.0.4
   photo_view: ^0.0.10
-  fluttertoast: ^2.2.3
+  fluttertoast: ^3.0.1
   image_picker_saver:
-    path: ../image_picker_saver
-  flutter_share_content: ^0.1.0
-  flutter_exif_rotation: ^0.1.2
+    git:
+      name: image_picker_saver
+      url: https://github.com/NGhebreial/image_picker_saver.git
+  flutter_share_content: ^0.2.0
+  flutter_exif_rotation: ^0.2.0
+  firebase_admob: ^0.8.0+2
 
 dev_dependencies:
   flutter_test:

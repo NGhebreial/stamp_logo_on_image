@@ -8,11 +8,12 @@ import 'package:flutter/services.dart';
 
 import 'package:image/image.dart' as im;
 import 'package:path_provider/path_provider.dart';
-import 'package:simple_permissions/simple_permissions.dart';
+import 'package:permission_handler/permission_handler.dart';
 import 'package:photo_view/photo_view.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:flutter_share_content/flutter_share_content.dart';
 import 'package:flutter_exif_rotation/flutter_exif_rotation.dart';
+import 'package:firebase_admob/firebase_admob.dart';
 
 import 'bottom_app_bar/fab_bottom_app_bar.dart';
 import 'bottom_app_bar/fancy_fab.dart';
@@ -102,6 +103,33 @@ class _LogoOnImage extends State<CameraUpload> {
   FABBottomAppBar _bottomBar;
 
   FancyFab _bottomButton;
+
+  //Color
+  Color _myColor= Color.fromRGBO(112, 217, 224, 1.0);
+
+  //Adds
+  InterstitialAd _interstitialAd;
+
+  //TEST: ca-app-pub-3940256099942544~3347511713
+  //PROD: ca-app-pub-7464346019946102~8222926952
+
+  static const MobileAdTargetingInfo targetingInfo = MobileAdTargetingInfo(
+    testDevices: <String>['ca-app-pub-7464346019946102~8222926952'],
+    childDirected: true,
+    nonPersonalizedAds: true,
+  );
+
+  //TEST: InterstitialAd.testAdUnitId,
+  //PROD: ca-app-pub-7464346019946102/6526701909
+  InterstitialAd createInterstitialAd() {
+    return InterstitialAd(
+      adUnitId: 'ca-app-pub-7464346019946102/6526701909',
+      targetingInfo: targetingInfo,
+      listener: (MobileAdEvent event) {
+        print("ADD EVENT $event");
+      },
+    );
+  }
 
   /// Create the widget to show the logo with the possibles positions
   /// It will show the widget only if there is any logo selected
@@ -292,6 +320,7 @@ class _LogoOnImage extends State<CameraUpload> {
                       height: 50.0,
                       width: 50.0,
                       child: new CircularProgressIndicator(
+                        backgroundColor: _myColor,
                         value: null,
                         strokeWidth: 7.0,
                       ),
@@ -315,16 +344,17 @@ class _LogoOnImage extends State<CameraUpload> {
 
   ///The initialization of the variables and data necessary
   void _initData() async {
-    await SimplePermissions.requestPermission(Permission.WriteExternalStorage);
+    await PermissionHandler().requestPermissions([PermissionGroup.storage]);
 
     _appBar = AppBar(
-      centerTitle: false,
-      leading: new Image.asset("assets/icon.png", width: 35.0),
+      centerTitle: true,
+      leading: new Image.asset("assets/icon.png",
+        width: 200.0, color: Colors.white70, alignment: Alignment.topLeft,),
       title: Text(
-        'Logo on image',
-        textAlign: TextAlign.left,
+        'Stamp logo on image',
+        textAlign: TextAlign.center,
       ),
-      backgroundColor: Color.fromRGBO(112, 217, 224, 1.0),
+      backgroundColor: _myColor,
       elevation: 6.0,
       actions: <Widget>[
         new IconButton(
@@ -360,6 +390,8 @@ class _LogoOnImage extends State<CameraUpload> {
       //to make faster the posterior treatment
       _loadListLogos();
     });
+
+    _interstitialAd = createInterstitialAd()..load();
   }
 
   /// Make the treatment of logos uploaded for the user
@@ -374,6 +406,7 @@ class _LogoOnImage extends State<CameraUpload> {
 
   ///To show the image widget when the screen is reload
   void _setStateImage() {
+    _interstitialAd?.show();
     setState(() {
       _setWidgets();
       _bodyWidget = _imageWidget;
@@ -382,6 +415,8 @@ class _LogoOnImage extends State<CameraUpload> {
 
   ///To show the loading widget when the screen is reload
   void _setStateLoading() {
+    _interstitialAd?.dispose();
+    _interstitialAd = createInterstitialAd()..load();
     setState(() {
       _bodyWidget = _loadingWidget;
       _bottomBar = FABBottomAppBar(
@@ -484,8 +519,8 @@ class _LogoOnImage extends State<CameraUpload> {
           toastLength: Toast.LENGTH_SHORT,
           gravity: ToastGravity.CENTER,
           timeInSecForIos: 1,
-          backgroundColor: Colors.red,
-          textColor: Colors.white);
+          backgroundColor: Colors.redAccent,
+          textColor: Colors.white70);
       _setStateImage();
       return;
     }
@@ -531,8 +566,8 @@ class _LogoOnImage extends State<CameraUpload> {
           toastLength: Toast.LENGTH_SHORT,
           gravity: ToastGravity.CENTER,
           timeInSecForIos: 1,
-          backgroundColor: Colors.red,
-          textColor: Colors.white);
+          backgroundColor: Colors.redAccent,
+          textColor: Colors.white70);
       return;
     }
     //_setStateLoading();
@@ -546,8 +581,8 @@ class _LogoOnImage extends State<CameraUpload> {
           toastLength: Toast.LENGTH_SHORT,
           gravity: ToastGravity.CENTER,
           timeInSecForIos: 3,
-          backgroundColor: Colors.blueAccent,
-          textColor: Colors.white);
+          backgroundColor: _myColor,
+          textColor: Colors.black);
       if (_angleDeg > 0.0) {
         List<Object> args = new List();
         args.add(_image);
@@ -590,8 +625,8 @@ class _LogoOnImage extends State<CameraUpload> {
           toastLength: Toast.LENGTH_SHORT,
           gravity: ToastGravity.CENTER,
           timeInSecForIos: 1,
-          backgroundColor: Colors.greenAccent,
-          textColor: Colors.white);
+          backgroundColor: _myColor,
+          textColor: Colors.black);
     });
   }
 
@@ -678,8 +713,8 @@ class _LogoOnImage extends State<CameraUpload> {
           toastLength: Toast.LENGTH_SHORT,
           gravity: ToastGravity.CENTER,
           timeInSecForIos: 1,
-          backgroundColor: Colors.red,
-          textColor: Colors.white);
+          backgroundColor: Colors.redAccent,
+          textColor: Colors.white70);
       _logoSelected = "";
       _setStateImage();
       return;

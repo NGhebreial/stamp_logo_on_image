@@ -152,7 +152,11 @@ class MyModalBottomSheetState extends State<MyModalBottomSheet> {
             new FlatButton(
               child: new Text("Cancel"),
               onPressed: () {
-                Navigator.of(context).pop();
+                selectedDelete.clear();
+                setState(() {
+                  showDeleteButton(false);
+                  Navigator.of(context).pop();
+                });
               },
             ),
             new FlatButton(
